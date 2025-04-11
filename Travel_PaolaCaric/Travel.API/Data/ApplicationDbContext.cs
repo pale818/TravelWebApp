@@ -37,5 +37,11 @@ namespace Travel.API.Data
 
         }
 
+public DbSet<Travel.API.Models.Wishlist> Wishlist { get; set; } = default!;
+
+public DbSet<Travel.API.Models.ApplicationUser> ApplicationUser { get; set; } = default!;
+
+public DbSet<Travel.API.Models.Log> Log { get; set; } = default!;
+
     }
 }
