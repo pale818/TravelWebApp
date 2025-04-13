@@ -7,9 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Travel.API.Data;
 using Travel.API.Models;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace Travel.API.Controllers
 {
+
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class WishlistController : ControllerBase
@@ -25,14 +29,14 @@ namespace Travel.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Wishlist>>> GetWishlist()
         {
-            return await _context.Wishlist.ToListAsync();
+            return await _context.Wishlists.ToListAsync();
         }
 
         // GET: api/Wishlist/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Wishlist>> GetWishlist(int id)
         {
-            var wishlist = await _context.Wishlist.FindAsync(id);
+            var wishlist = await _context.Wishlists.FindAsync(id);
 
             if (wishlist == null)
             {
@@ -77,7 +81,7 @@ namespace Travel.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Wishlist>> PostWishlist(Wishlist wishlist)
         {
-            _context.Wishlist.Add(wishlist);
+            _context.Wishlists.Add(wishlist);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetWishlist", new { id = wishlist.Id }, wishlist);
@@ -90,13 +94,13 @@ namespace Travel.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteWishlist(int id)
         {
-            var wishlist = await _context.Wishlist.FindAsync(id);
+            var wishlist = await _context.Wishlists.FindAsync(id);
             if (wishlist == null)
             {
                 return NotFound();
             }
 
-            _context.Wishlist.Remove(wishlist);
+            _context.Wishlists.Remove(wishlist);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -104,7 +108,7 @@ namespace Travel.API.Controllers
 
         private bool WishlistExists(int id)
         {
-            return _context.Wishlist.Any(e => e.Id == id);
+            return _context.Wishlists.Any(e => e.Id == id);
         }
     }
 }

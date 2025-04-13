@@ -7,9 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Travel.API.Data;
 using Travel.API.Models;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace Travel.API.Controllers
 {
+
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class GuideController : ControllerBase

@@ -16,7 +16,10 @@ namespace Travel.API.Data
         public DbSet<Trip> Trips { get; set; }
         public DbSet<Destination> Destinations { get; set; }
         public DbSet<Guide> Guides { get; set; }
-        //public DbSet<TripGuide> TripGuides { get; set; }
+
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<Wishlist> Wishlists { get; set; }
+        public DbSet<Log> Logs { get; set; }
 
 
         // Makes sure EF Core uses the actual table name "Destination" and not "Destinations"
@@ -30,6 +33,9 @@ namespace Travel.API.Data
             modelBuilder.Entity<Destination>().ToTable("Destination");
             modelBuilder.Entity<Trip>().ToTable("Trip");
             modelBuilder.Entity<Guide>().ToTable("Guide");
+            modelBuilder.Entity<ApplicationUser>().ToTable("ApplicationUser");
+            modelBuilder.Entity<Wishlist>().ToTable("Wishlist");
+            modelBuilder.Entity<Log>().ToTable("Log");
 
 
 
@@ -37,11 +43,7 @@ namespace Travel.API.Data
 
         }
 
-public DbSet<Travel.API.Models.Wishlist> Wishlist { get; set; } = default!;
 
-public DbSet<Travel.API.Models.ApplicationUser> ApplicationUser { get; set; } = default!;
-
-public DbSet<Travel.API.Models.Log> Log { get; set; } = default!;
 
     }
 }

@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Travel.API.Data;
 using Travel.API.Models;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace Travel.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ApplicationUserController : ControllerBase
@@ -25,14 +28,14 @@ namespace Travel.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ApplicationUser>>> GetApplicationUser()
         {
-            return await _context.ApplicationUser.ToListAsync();
+            return await _context.ApplicationUsers.ToListAsync();
         }
 
         // GET: api/ApplicationUser/5
         [HttpGet("{id}")]
         public async Task<ActionResult<ApplicationUser>> GetApplicationUser(int id)
         {
-            var applicationUser = await _context.ApplicationUser.FindAsync(id);
+            var applicationUser = await _context.ApplicationUsers.FindAsync(id);
 
             if (applicationUser == null)
             {
@@ -78,7 +81,7 @@ namespace Travel.API.Controllers
         [HttpPost]
         public async Task<ActionResult<ApplicationUser>> PostApplicationUser(ApplicationUser applicationUser)
         {
-            _context.ApplicationUser.Add(applicationUser);
+            _context.ApplicationUsers.Add(applicationUser);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetApplicationUser", new { id = applicationUser.Id }, applicationUser);
@@ -88,13 +91,13 @@ namespace Travel.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteApplicationUser(int id)
         {
-            var applicationUser = await _context.ApplicationUser.FindAsync(id);
+            var applicationUser = await _context.ApplicationUsers.FindAsync(id);
             if (applicationUser == null)
             {
                 return NotFound();
             }
 
-            _context.ApplicationUser.Remove(applicationUser);
+            _context.ApplicationUsers.Remove(applicationUser);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -102,7 +105,7 @@ namespace Travel.API.Controllers
 
         private bool ApplicationUserExists(int id)
         {
-            return _context.ApplicationUser.Any(e => e.Id == id);
+            return _context.ApplicationUsers.Any(e => e.Id == id);
         }
     }
 }

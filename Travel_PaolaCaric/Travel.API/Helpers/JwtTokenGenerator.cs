@@ -24,7 +24,7 @@ namespace Travel.API.Helpers
         {
             var claims = new[]
             {
-                 new Claim(JwtRegisteredClaimNames.Sub, user.UserName),      // standard clainm - subject
+                new Claim(JwtRegisteredClaimNames.Sub, user.UserName),      // standard clainm - subject
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),       // standard claim - email
                 new Claim("userId", user.Id.ToString()),                    // custom claim - userid
                 new Claim("isAdmin", user.IsAdmin.ToString().ToLower())     // custom claim - isAdmin

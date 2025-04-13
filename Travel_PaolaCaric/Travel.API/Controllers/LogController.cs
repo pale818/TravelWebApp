@@ -7,9 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Travel.API.Data;
 using Travel.API.Models;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace Travel.API.Controllers
 {
+
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class LogController : ControllerBase
@@ -25,14 +29,14 @@ namespace Travel.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Log>>> GetLog()
         {
-            return await _context.Log.ToListAsync();
+            return await _context.Logs.ToListAsync();
         }
 
         // GET: api/Log/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Log>> GetLog(int id)
         {
-            var log = await _context.Log.FindAsync(id);
+            var log = await _context.Logs.FindAsync(id);
 
             if (log == null)
             {
@@ -78,7 +82,7 @@ namespace Travel.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Log>> PostLog(Log log)
         {
-            _context.Log.Add(log);
+            _context.Logs.Add(log);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetLog", new { id = log.Id }, log);
@@ -88,13 +92,13 @@ namespace Travel.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteLog(int id)
         {
-            var log = await _context.Log.FindAsync(id);
+            var log = await _context.Logs.FindAsync(id);
             if (log == null)
             {
                 return NotFound();
             }
 
-            _context.Log.Remove(log);
+            _context.Logs.Remove(log);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -102,7 +106,7 @@ namespace Travel.API.Controllers
 
         private bool LogExists(int id)
         {
-            return _context.Log.Any(e => e.Id == id);
+            return _context.Logs.Any(e => e.Id == id);
         }
     }
 }
