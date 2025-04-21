@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Welcome to Travel Agency Paola!";
+}
+
+
+<div class="landing-page">
+    <h1 class="display-4">🌍 Welcome to Travel Agency Paola</h1>
+    <p class="lead">Discover beautiful destinations with expert guides.</p>
+
+
+    <!-- asp-controller tells folder name of the controller location  -->
+    <!-- asp-action tells the page name  -->
+    <!-- So when user clicks on Login button it will be loaded Account/Login.cshtml page  -->
+    <div>
+        <a asp-controller="Account" asp-action="Login" class="btn btn-primary">Login</a>
+        <a asp-controller="Account" asp-action="Register" class="btn btn-outline-light">Register</a>
+    </div>
+</div>

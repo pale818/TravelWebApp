@@ -32,9 +32,14 @@ namespace Travel.API.Helpers
             };
 
 
+
+
+            //takes the key(from appsettings.json) , hashes it and saves it to key variable
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key));
 
 
+
+            //gives the approval to the hashed key so it can be used
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
 
